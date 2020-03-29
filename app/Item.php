@@ -8,4 +8,6 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
 class Item extends Model
 {
     use QueryCacheable;
+
+    protected $fillable = ['menu_id', 'title'];
 }
