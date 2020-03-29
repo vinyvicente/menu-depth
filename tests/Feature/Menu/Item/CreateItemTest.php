@@ -38,4 +38,17 @@ class CreateItemTest extends TestCase
                 ]
             ]);
     }
+
+    public function testCreateItemsFromMenuWithMenuNotCreated()
+    {
+        $response = $this->postJson('/api/menus/1/items', [
+            ['title' => 'Item 1',],
+            ['title' => 'Item 2',],
+        ]);
+
+        $response->assertStatus(404)
+            ->assertJson([
+                'message' => 'No query results for model [App\\Menu] 1'
+            ]);
+    }
 }
