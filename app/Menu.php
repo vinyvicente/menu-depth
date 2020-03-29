@@ -10,4 +10,9 @@ class Menu extends Model
     use QueryCacheable;
 
     protected $fillable = ['title'];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'menu_id', 'id');
+    }
 }

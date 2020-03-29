@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Menu\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MenuResource;
+use App\Http\Resources\ItemResource;
 use App\Item;
 use App\Menu;
 use Illuminate\Http\JsonResponse;
@@ -19,6 +19,6 @@ class CreateItem extends Controller
 
         array_map(fn (array $item) => Item::create(['menu_id' => $menu->id, 'title' => $item['title']]), $request->all());
 
-        return (new MenuResource($menu))->response()->setStatusCode(201);
+        return (ItemResource::collection(Item::withMenu($menu)->paginate()))->response()->setStatusCode(201);
     }
 }

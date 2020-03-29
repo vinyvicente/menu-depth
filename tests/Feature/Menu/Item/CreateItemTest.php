@@ -16,7 +16,13 @@ class CreateItemTest extends TestCase
             ['title' => 'Item 2',],
         ]);
 
-        $response->assertStatus(201);
+        $response->assertStatus(201)
+            ->assertJson([
+                'data' => [],
+                'meta' => [
+                    'total' => 2
+                ]
+            ]);
     }
 
     public function testCreateItemsFromMenuWithItemWrong()
